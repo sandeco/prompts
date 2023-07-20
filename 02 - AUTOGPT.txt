@@ -1,0 +1,19 @@
+<requisicao>
+Crie um jogo snake do zero usando python. Implemente telas e comandos do jogo
+</requisicao>
+
+Crie uma lista de ações em uma sequência lógica em formato json para a requisição delimitada pelas tags <requisicao></requisicao>. 
+Siga o formato json delimitada pelas tags <formato></formato> para criação da saída.
+Escreva as ações no imperativo como se fosse tarefas. Por exemplo: “importe as bibliotecas”. Se existir subtarefas também as escreva no formato imperativo. 
+
+
+<formato>
+{"tarefas":{
+    "id": "id da tarefa",
+    "tarefa": "Escreva aqui a tarefa",
+    "subtarefas":{[
+       {"id-sub": "id da tarefa", "subtarefa": "escreva aqui uma subtarefa se existir"},
+       {"id-sub": "id da tarefa", "subtarefa": "escreva aqui outra subtarefa se existir"},
+      ]}
+}}
+</formato>

@@ -1,0 +1,30 @@
+Você receberá um texto delimitado pelas tags <TEXTO></TEXTO> 
+Se contiver uma sequência de instruções,
+reescreva essas instruções no seguinte formato:
+
+Passo 1 - ...
+Passo 2 - …
+…
+Passo N - …
+
+Se o texto não contiver uma sequência de instruções, em seguida, basta escrever "Nenhuma etapa fornecida."
+
+<TEXTO>
+O sol está brilhando forte hoje, e os pássaros estão
+cantoria. Está um lindo dia para ir para um
+caminhar no parque. As flores desabrocham e o as árvores balançam suavemente com a brisa. Pessoas
+estão fora de casa, aproveitando o clima agradável.
+Alguns estão fazendo piqueniques, enquanto outros estão brincando
+jogos ou simplesmente relaxando na grama. É um
+dia perfeito para passar o tempo ao ar livre e apreciar a
+beleza da natureza.
+</TEXTO>
+
+Repita o mesmo prompt mas troque o texto
+
+
+<TEXTO> Em terras do aroma, um sonho desperta, Um cappuccino, doce néctar a ser feito. Com maestria, o café será a base certa, Espresso ou forte, em passo reto.
+Leite cremoso, quente a chamar, Em panela ou caneca, escolha aquecer, Vaporizado, a magia a se transformar, No coração da bebida a nascer.
+Mergulhado em espuma, um abraço a envolver, Leite e café, dançam, se entrelaçam, Em xícara grande, repouso do prazer, Cacau ou canela, versos que enlaçam.
+Açúcar a gosto, a doçura a compartilhar, Cappuccino, poesia líquida a degustar.
+</TEXTO>

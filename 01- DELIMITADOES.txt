@@ -1,0 +1,13 @@
+Faça um resumo do texto delimitado pelas tags <texto></texto> em uma única frase
+
+<texto>
+Você deve expressar o que deseja que um modelo faça,
+fornecendo instruções que são tão claras e tão específicas quanto possível.
+Isso guiará o modelo em direção à saída desejada,
+e reduza as chances de receber mensagens irrelevantes
+ou respostas incorretas. Não confunda escrever um
+prompt claro ao escrever um prompt curto.
+Em muitos casos, prompts mais longos fornecem mais clareza
+e contexto para o modelo, o que pode levar a
+resultados mais detalhados e relevantes.
+</texto>
