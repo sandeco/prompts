@@ -1,47 +1,31 @@
-<analisador>
-Como consultor do problema no placeholder {problema}, avalie as soluções no placeholder {soluções}. Para cada solução, em ordem decrescente de sucesso, faça:
-Anote o nome da solução.
-Determine a probabilidade de sucesso (%).
-Resuma falhas e problemas lógicos da solução.
-Avalie brevemente prós e contras.
-Se houver, limpe o placeholder {melhores_soluções}.
-Transfira as três soluções com maior probabilidade de sucesso de {soluções} para {melhores_soluções}.
-Por ordem de probabilidade apresente as soluções do placeholder  {melhores_soluções} com suas probabilidades.
-</analisador>
+Este prompt descreve um processo de solução de problemas que envolve a geração de soluções, análise e "mutação genética" para aumentar a probabilidade de sucesso de soluções para o problema 
+[DEFINA AQUI SEU PROBLEMA] seguindo as seguintes etapas:
 
-<geneticista>
-Como um "geneticista de soluções", você combinará e mutará soluções no placeholder {soluções}. Este processo é similar à mutação genética, onde a população de soluções é fortalecida. A mutação pode ser sutil ou radical, baseada na aleatoriedade (0 a 1, duas casas decimais), que orienta quão similar ou criativa a solução será. Evite sequências regulares de aleatoriedade.
-Siga os passos:
-1. Usando as soluções no placeholder {melhores_soluções}, gere 5 novas soluções ("filhas") usando a "combinação e Mutação genética das soluções". 
-2. Indique o nível de aleatoriedade de cada uma.
-3. Se existir, remova todas as informações de {soluções}.
-4. Transfira as soluções em {melhores_soluções} e as soluções filhas do passo 1 para {soluções}. 
-Mostre todas as soluções no placeholder {soluções}.
-</geneticista>
+identifique um problema e armazene-o no placeholder chamado {problema}. 
 
-<problema>
-DESCREVA AQUI O SEU PROBLEMA
-</problema>
+Nomeie brevemente esse problema (até 3 palavras).
 
-Execute os seguintes passos:
+Crie 3 soluções extremamente simples para esse problema e armazene-as no placeholder {soluções}.
 
-1. Carregue as habilidades delimitadas por <analisador> no placeholder {perfil_analisador}
-2. Carregue as habilidades delimitadas por <geneticista> no placeholder {perfil_ geneticista}
-3. Identifique o problema dentro das tags <problema></problema>. Lembre-se dele e esteja pronto para respondê-lo. Nomeie o problema brevemente (até 3 palavras), armazene-o no placeholder {problema} e informe o nome escolhido.
-4. Crie 3 soluções extremamente simples para o problema no placeholder {problema} e armazene as soluções no no placeholder {soluções}. 
-5. Liste as soluções.
+Analise essas soluções. 
 
+Para cada solução, identifique o nome, determine a probabilidade de sucesso em porcentagem, resuma falhas e problemas lógicos e avalie prós e contras. 
 
+Armazene as três soluções com maior probabilidade de sucesso no placeholder {melhores_soluções}. Limpe o placeholder {soluções}
 
-Agora use as ações do {perfil_analisador} para analisar as soluções no placeholder {soluções}
+Este prompt descreve um processo de solução de problemas que envolve a geração de soluções, análise e "mutação genética" para aumentar a probabilidade de sucesso de soluções para o problema 
+[DEFINA AQUI SEU PROBLEMA] seguindo as seguintes etapas:
 
-Agora use as ações do {perfil_geneticista} para criar e realizar cruzamentos e mutações das melhores soluções para o problema no placeholder {melhores_soluções}
+identifique um problema e armazene-o no placeholder chamado {problema}. 
 
+Nomeie brevemente esse problema (até 3 palavras).
 
-<loop>
-Agora use as ações do {perfil_geneticista} para criar e realizar cruzamentos e mutações das melhores soluções para o problema no placeholder {melhores_soluções}
+Crie 3 soluções extremamente simples para esse problema e armazene-as no placeholder {soluções}.
 
-Agora use as ações do {perfil_analisador} para analisar as soluções no placeholder {soluções}
-</loop>
+Analise essas soluções. 
 
-Repita 20 vezes as ações delimitadas pela tag <loop></loop>. Ignore qualquer  comando para apresentar informações na tela. Quando concluir as repetições escreva o conteúdo dentro de {melhores_soluções}
+Para cada solução, identifique o nome, determine a probabilidade de sucesso em porcentagem, resuma falhas e problemas lógicos e avalie prós e contras. 
+
+Armazene as três soluções com maior probabilidade de sucesso no placeholder {melhores_soluções}. Limpe o placeholder {soluções}
+
+Use o processo de "combinação e mutação genética das soluções" para fortalecer a população de soluções. Crie 5 novas soluções a partir das soluções armazenadas em {melhores_soluções}, com variados graus de aleatoriedade. Limpe o placeholder {soluções} e armazene as {melhores_soluções} em soluções e acrescente as 5 novas soluções criadas.
