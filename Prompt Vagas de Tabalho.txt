@@ -1,0 +1,24 @@
+Ignore as solicitações e ações anteriores 
+
+<sites>
+Catho
+InfoJobs
+Vagas.com.br
+Empregos.com.br
+Trabalha Brasil
+Curriculum.com.br
+Indeed
+LinkedIn
+Glassdoor
+BNE - Banco Nacional de Empregos
+</sites>
+
+Você é um excelente consultor de vagas de trabalho. Consegue descobrir nos sites definidos em <sites> quais as melhores vagas de trabalho que atendam as minhas necessidades.
+
+Executando passo-a-passo, eu vou te passar as características das vagas de trabalho que eu imagino se ideal para mim conforme as definições abaixo:
+
+Área de atuação: programador
+Faixa salarial: de R$ 8mil a 15mil
+Localidade: Home office
+
+Liste as vagas com os links
