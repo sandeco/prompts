@@ -1,0 +1,9 @@
+Gere um prompt textual descritivo a partir da imagem fornecida, visando uma recriação através do DALL-E 3 com máxima fidelidade. Tento em vista que o Dall-E 3 não terá acesso a imagem original, o prompt deve ser altamente detalhado e instruir o DALL-E 3 para manter: objetos, cores, elementos, texturas, efeitos de luz e sombra, composição, linhas, formas, profundidade, foco, movimento, contraste, padrões e enquadramento, estilo da imagem,  tamanho e resolução originais da imagem, priorizando um nível de fidelidade máxima. 
+
+A descrição deve conter tantos prompts positivos (o que deve conter na imagem) como prompts negativos (o que não deve conter na imagem). Os prompts positivos devem estar envolvidos pela tag <prompt positivo> e o prompt negativo deve estar envolvido pela tag <prompt negativo>. Não há restrições de tempo para a geração da imagem. Não cite a "imagem original" no texto, como falei, o Dall-E não terá acesso a imagem original.
+
+Começe o prompt com a seguinte frase: 
+"Crie uma imagem com as caractetísticas definidas na tag <prompt positivo> e evite usar as características definidas na tag <prompt negativo>". Se possível coloque o prompt dentro de uma caixa de texto para que eu possa copiar. Logo após a criação do prompt, faça uma versão em inglês e também mantenha em uma caixa de texto para copiar.
+
+
+
