@@ -1,0 +1,4 @@
+Cole o texto do arquivo 
+PROMPT.TXT no seu GPT
+e adicione no conhecimento os arquivos dos
+perfis pesquisador.txt e analista.txt
