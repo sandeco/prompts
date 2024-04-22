@@ -1,0 +1,124 @@
+#<agent7>
+    # Filtrando mensagens que possuem um texto (ignorando mensagens sem ":")
+    df_msgs = df_msgs[df_msgs["text"].notnull()]
+
+    # Retirando quebra de linha
+    df_msgs['text'] = df_msgs['text'].str.replace('\n', ' ')
+
+    # Excluir qualquer linha dos dataframes df_msgs que contenha “NaN”
+    df_msgs = df_msgs.dropna(subset=['text'])
+
+    # Remove rows where the "text" column is "null"
+    df_msgs = df_msgs[df_msgs["text"] != "null"]
+
+    # Salvar df_msgs como CSV
+    df_msgs.to_csv("df_msgs.csv", index=False)
+
+
+#<agent8>
+    with open('stopwords.txt', 'r', encoding='utf-8') as file:
+        stopwords = file.readlines()
+    stopwords = [word.strip() for word in stopwords]
+
+    num_stopwords = len(stopwords)
+    num_stopwords
+
+    # Creating a copy of the "text" column called "filter"
+    df_msgs['filter'] = df_msgs['text']
+
+    # Removing words in the stopwords list from the "filter" column
+    df_msgs['filter'] = df_msgs['filter'].apply(lambda x: ' '.join([word for word in x.split() if word not in stopwords]))
+
+    # Removing special characters but keeping word accents
+    df_msgs['filter'] = df_msgs['filter'].apply(lambda x: re.sub(r'[^a-záéíóúãõâêôçüà\s]', '', x))
+
+    # Removing numbers
+    df_msgs['filter'] = df_msgs['filter'].apply(lambda x: re.sub(r'\d+', '', x))
+
+    # Removing punctuations but keeping them in links
+    punctuations = [r'\.', r',', r';', r':', r'\?', r'!']
+    for punctuation in punctuations:
+        df_msgs['filter'] = df_msgs['filter'].apply(lambda x: re.sub(punctuation, '', x) if 'http' not in x else x)
+
+    # Removing abbreviations
+    abbreviations = ["tb", "vc", "tmj"]
+    for abbreviation in abbreviations:
+        df_msgs['filter'] = df_msgs['filter'].apply(lambda x: x.replace(abbreviation, ''))
+
+    # Removing links
+    df_msgs['filter'] = df_msgs['filter'].apply(lambda x: re.sub(r'http\S+', '', x))
+
+    # Removing emojis
+    df_msgs['filter'] = df_msgs['filter'].apply(lambda x: re.sub(r'[\U00010000-\U0010ffff]', '', x))
+
+    # Removing words that appear less than 5 times
+    word_counts = df_msgs['filter'].str.split(expand=True).stack().value_counts()
+    rare_words = word_counts[word_counts < 5].index.tolist()
+    df_msgs['filter'] = df_msgs['filter'].apply(lambda x: ' '.join([word for word in x.split() if word not in rare_words]))
+
+    # Removing textual expressions of laughter
+    laughter_expressions = ["rs", "kkk", "lol"]
+    for expression in laughter_expressions:
+        df_msgs['filter'] = df_msgs['filter'].apply(lambda x: x.replace(expression, ''))
+
+    # Remover mensagens vazias ou somente com espaços
+    df_msgs = df_msgs[df_msgs['filter'].str.strip() != ""]
+
+
+#<agent9>
+    # Regular expression to match most emojis
+    emoji_pattern = r'[\U00010000-\U0010ffff]'
+
+    # Extracting emojis using the regex pattern
+    df_msgs['emojis'] = df_msgs['text'].apply(lambda x: ''.join(re.findall(emoji_pattern, x)))
+
+    df_msgs.head()
+
+    # Function to extract links from a text
+    def extract_link(text):
+        urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', text)
+        return urls[0] if urls else None
+
+    # Function to replace links in a text with the word 'LINK'
+    def replace_link_with_word(text):
+        return re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', 'LINK', text)
+
+    # Apply the functions to the df_msgs DataFrame
+    df_msgs['link'] = df_msgs['text'].apply(extract_link)
+    df_msgs['text'] = df_msgs['text'].apply(replace_link_with_word)
+
+    df_msgs['id'] = df_msgs.index
+
+
+#<agent10>
+    entered_users = df_actions[df_actions['action'] == 'entrou'][['timestamp', 'user']]
+
+    # Creating a list of users who have left the group
+    left_users = df_actions[df_actions['action'] == 'saiu']['user'].tolist()
+
+    # Creating a list of users who have been removed from the group
+    removed_users = df_actions[df_actions['action'] == 'removido']['user'].tolist()
+
+    # Creating a dataframe of users who are still active in the group
+    # These are users who have entered but have neither left nor been removed
+    ativos = entered_users[
+        ~entered_users['user'].isin(left_users) &
+        ~entered_users['user'].isin(removed_users)
+    ].drop_duplicates(subset='user', keep='last')
+
+    message_counts = df_msgs.groupby('user').size().reset_index(name='qtd_msgs')
+
+    # Merging the message counts with the "ativos" dataframe
+    ativos = pd.merge(ativos, message_counts, on='user', how='left')
+
+    # Filling NaN values in the "qtd_msgs" column with 0
+    ativos['qtd_msgs'] = ativos['qtd_msgs'].fillna(0).astype(int)
+
+    # Creating the "ativo" column: 1 for users with messages, 0 for users without messages
+    ativos['ativo'] = ativos['qtd_msgs'].apply(lambda x: 1 if x > 0 else 0)
+
+    # SUB-TASK  Extracting DDD and checking if the user is from Brazil (+55)
+    ativos['ddd'] = ativos['user'].apply(lambda x: re.findall(r'\+55 (\d{2})', x)[0] if '+55' in x else 0)
+
+    # Sorting the "ativos" dataframe by the number of messages, in descending order
+    ativos = ativos.sort_values by='qtd_msgs', ascending=False)

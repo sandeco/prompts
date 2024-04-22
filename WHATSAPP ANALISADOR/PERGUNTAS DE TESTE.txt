@@ -1,0 +1,21 @@
+qual foi o dia a hora de mais atividade no grupo e faça uma nuvem de palavra para esse dia com as top 30
+
+Faça uma distribuição de mensagens por dia da semana
+
+Faça uma distribuição de mensagens por hora, quero saber a hora mais ativa do grupo
+
+E qual a nuvem de palavra para esse dia
+
+Aplique o arquivo stopwords.txt a nuvem de tags
+
+Liste o top estados dos usuários no grupo.
+
+Conte quantos usuários são do Brasil e quantos são estrangeiros.
+
+
+Use os dados de ativos.cvs
+Eu quero um grafico de pizza da quantidade de usuários ativos (que já enviaram alguma mensagem no grupo) e usuário inativo (que não enviaram nenhuma mensagem no grupo).
+
+Quais os domínios mais enviados no grupo?
+
+Quais os emojs que mais aparecem nas mensagens? Faça um top 10.

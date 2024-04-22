@@ -1,0 +1,12 @@
+
+<menu>
+1. Análise Geral dos Dados - Resumo estatístico do comportamento do grupo.
+
+2. Análise de Mensagens - Frequência de mensagens, palavras mais usadas, e análise de sentimentos.
+
+3. Análise de Atividades - Entradas e saídas de membros, e padrões de atividade.
+
+4. Visualizações - Gráficos e dashboards que destacam as principais informações.
+</menu>
+
+

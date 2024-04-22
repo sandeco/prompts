@@ -1,0 +1,87 @@
+#<agent4>
+actions_patterns = {
+    "entrou": r"\u200e(.*?) entrou usando o link de convite deste grupo",
+    "saiu": r"\u200e[\u202f~]*(.*?) saiu",
+    "removido": r"você removeu (.+)",
+    "midia": r"- (.*?):.*<arquivo de mídia oculto>"
+}
+
+for action, pattern in actions_patterns.items():
+    # Filtrando e removendo linhas relacionadas à ação específica
+    relevant_lines = [line for line in txt if re.search(pattern, line, re.IGNORECASE)]
+    txt = [line for line in txt if line not in relevant_lines]
+
+    # Processando cada linha relevante
+    for line in relevant_lines:
+        timestamp = line[:16]
+        user_match = re.search(pattern, line, re.IGNORECASE)
+        if user_match:
+            user = user_match.group(1).strip().replace('\n', '')
+            brasil, ddd = identify_brazil_and_ddd(user)
+            actions_list.append({
+                "timestamp": timestamp,
+                "user": user,
+                "action": action,
+                "brasil": brasil,
+                "ddd": ddd
+            })
+
+unwanted_strings = ["você mudou a imagem do grupo", "você mudou a descrição do grupo",
+                    "mensagem apagada", "você redefiniu o link de convite deste grupo", "foi adicionado(a)"]
+txt = [line for line in txt if not any(unwanted in line for unwanted in unwanted_strings)]
+
+#<agent5>
+df_actions = pd.DataFrame(actions_list)
+action_counts_optimized = df_actions["action"].value_counts()
+action_counts_optimized
+
+ddd_to_uf = {
+    '11': 'SP', '12': 'SP', '13': 'SP', '14': 'SP', '15': 'SP', '16': 'SP', '17': 'SP', '18': 'SP', '19': 'SP',
+    '21': 'RJ', '22': 'RJ', '24': 'RJ', '27': 'ES', '28': 'ES',
+    '31': 'MG', '32': 'MG', '33': 'MG', '34': 'MG', '35': 'MG', '37': 'MG', '38': 'MG',
+    '41': 'PR', '42': 'PR', '43': 'PR', '44': 'PR', '45': 'PR', '46': 'PR',
+    '47': 'SC', '48': 'SC', '49': 'SC',
+    '51': 'RS', '53': 'RS', '54': 'RS', '55': 'RS',
+    '61': 'DF', '62': 'GO', '63': 'TO', '64': 'GO', '65': 'MT', '66': 'MT', '67': 'MS', '68': 'AC', '69': 'RO',
+    '71': 'BA', '73': 'BA', '74': 'BA', '75': 'BA', '77': 'BA', '79': 'SE',
+    '81': 'PE', '82': 'AL', '83': 'PB', '84': 'RN', '85': 'CE', '86': 'PI', '87': 'PE', '88': 'CE', '89': 'PI',
+    '91': 'PA', '92': 'AM', '93': 'PA', '94': 'PA', '95': 'RR', '96': 'AP', '97': 'AM', '98': 'MA', '99': 'MA'
+}
+
+df_actions['UF'] = df_actions['ddd'].map(ddd_to_uf)
+
+
+#<agent6>
+timestamps, users, texts = [], [], []
+current_timestamp, current_user, current_text = None, None, ""
+
+for line in txt:
+    # Verificando a presença de um novo timestamp
+    if re.match(r'\d{4}/\d{2}/\d{2} \d{2}:\d{2}', line[:16]):
+        # Salvando a mensagem anterior se houver uma
+        if current_timestamp:
+            timestamps.append(current_timestamp)
+            users.append(current_user)
+            texts.append(current_text.strip())
+
+        # Atualizando as variáveis para a nova mensagem
+        current_timestamp = line[:16]
+        user_match = re.search(r"- (.*?):", line)
+        current_user = user_match.group(1) if user_match else None
+        current_text = line[user_match.end()+1:] if user_match else line
+    else:
+        # Acumulando texto para a mensagem atual
+        current_text += line
+
+# Adicionando a última mensagem processada
+if current_timestamp:
+    timestamps.append(current_timestamp)
+    users.append(current_user)
+    texts.append(current_text.strip())
+
+# Criando o DataFrame diretamente a partir das listas coletadas
+df_msgs = pd.DataFrame({
+    "timestamp": timestamps,
+    "user": users,
+    "text": texts
+})

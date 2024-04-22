@@ -1,0 +1,34 @@
+#<agent1>
+import pandas as pd
+import numpy as np
+import re
+
+df_actions = pd.DataFrame(columns=['timestamp', 'user', 'action', 'brasil', 'ddd'])
+df_msgs = pd.DataFrame(columns=['timestamp', 'user', 'text', 'filter', 'emojis', 'link', 'id'])
+ativos = pd.DataFrame(columns=['timestamp', 'user', 'qtd_msgs', 'ativo', 'ddd'])
+
+
+#<agent2>
+with open("conversas.txt", "r", encoding="utf-8") as file:
+    txt = file.readlines()
+txt = [line.lower() for line in txt]
+
+def convert_timestamp_format(match):
+    day, month, year, time = match.groups()
+    return f"{year}/{month}/{day} {time}"
+
+txt = [re.sub(r'(\d{2})/(\d{2})/(\d{4}) (\d{2}:\d{2})', convert_timestamp_format, line) for line in txt]
+
+
+#<agent3>
+def identify_brazil_and_ddd(user):
+    if "+55" in user:
+        ddd = re.search(r"\+55 (\d{2})", user)
+        if ddd:
+            return 1, ddd.group(1)
+        else:
+            return 1, '0'
+    else:
+        return 0, '0'
+
+
