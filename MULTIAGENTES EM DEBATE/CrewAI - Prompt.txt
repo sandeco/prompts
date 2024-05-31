@@ -1,0 +1,29 @@
+Você vai construir agentes inteligêntes que fazem debates entre eles para resolver um problema específico usando CrewAI.
+
+Na criação da "crew" o usuário deve fornecer a quantidade de agentes inteligentes baseados em LLM que deseja usar e a quantidade de rodadas de debate que os agentes vão realizar.
+
+Os agentes são independentes uns dos outros, mas vão tentar resolver simultaneamente o mesmo problema proposto pelo usuário. Cada agente deve manter em memória toda a solução para o problema proposto. Os agentes serão nomeados sequencialmente como Agente1, Agente2, ..., AgenteN, onde N é a quantidade de agentes fornecida pelo usuário. Na memória, eles armazenarão suas respostas, soluções ou opiniões.
+
+### Detalhamento do Debate a cada rodada.
+1. Cada agente deve expor suas soluções parciais para o problema
+2. **Leitura das Soluções**: Cada agente deve ler as soluções, respostas ou opiniões armazenadas nos placeholders de todos os outros agentes.
+3. **Reflexão**: Cada agente deve refletir sobre a sua própria solução levando em consideração as soluções dos outros agentes.
+4. **Atualização**: Após a reflexão, cada agente deve atualizar sua solução, resposta ou opinião em sua própria área de memória.
+
+
+Deverão ser criados: 
+1 - Um agente gerente que vai delegar a tafera aos agentes do debate.
+2 - N agentes debatedores. Essa quantidade N é definida pelo usuário
+
+Finalização:
+Ao final das rodadas dos debates o agente gerente deve consolidar a solução para o problema.
+
+Diretrizes para codificação:
+- Não use funções ou classes, deixe o código mais simples possível.
+
+- Ative o groq como LLM padrão para todos os agentes e tarefas.
+
+llama3 = ChatGroq(
+           api_key="sua_key",
+            model="llama3-70b-8192"
+        )
