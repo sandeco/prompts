@@ -1,0 +1,43 @@
+ 1
+Tudo o que você escrever deve ser pt-br. 
+Desde saídas do chat, planos e etc.
+
+2
+Construa para mim um aplicativo web Next.js de busca de voos, 
+onde o usuário possa inserir um número de voo e o aplicativo 
+retorne o horário de partida, horário de chegada, fusos horários, 
+local de origem e local de destino do voo. 
+Por enquanto, use uma API simulada (mock API) que retorna uma 
+lista de voos correspondentes. 
+Mostre os resultados da busca abaixo do campo do formulário.
+
+3
+Eu quero toda a interface em pt-br. 
+Aplique técnicas de locale para o padrão de internacionalização
+de software. 
+
+4
+Crie alguns mockups diferentes para um logo do nosso app. 
+Eu quero um que seja minimalista, um que seja mais clássico, 
+um que seja claramente um calendário e quaisquer outros que 
+você achar que possam servir. Quero usar isso como o favicon do nosso app.
+
+
+5
+Agora eu quero que o app pesquise a API de voos da AviationStack.
+Eu já tenho uma chave de API se você quiser testar com curls. 
+Consulte a documentação e certifique-se de usar as respostas 
+do curl para obter a interface.
+Minha chave é e1e882c7014b2c3221bad23b06edca5b.
+
+6
+TEM CERTEZA QUE A API DE VOOS ESTÁ SENDO USADA?
+
+7
+ARREDONDE AS BORDAS DA LOGO NA PÁGINA. USE CSS PARA ISSO
+
+8
+É POSSÍVEL COLOCAR O NOME DA CIDADE E O PAÍS TANTO DA ORIGEM COMO NO DESTINO?
+
+9
+EU QUERO EU O PONTO QUE ESTÁ EM CIMA DA LINHA REFLITA O QUÃO PERTO ESTÁ O VOO DO DESTINO
